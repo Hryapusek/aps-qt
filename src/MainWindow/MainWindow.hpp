@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_HPP
 
 #include <QMainWindow>
+#include "Ecosystem/EventHolder.hpp"
 
 namespace Ui
 {
@@ -19,6 +20,7 @@ public:
 private:
   std::unique_ptr<Ui::MainWindow> ui_;
   void execStartupWindow();
+  std::unique_ptr<EventHolder> eventHolder;
 };
 
 #endif

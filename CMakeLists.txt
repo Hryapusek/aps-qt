@@ -18,6 +18,10 @@ add_executable(${target}
 
   src/MainWindow/StartupDialog.cpp
   src/MainWindow/StartupDialog.hpp
+
+  src/MainWindow/Ecosystem/EventHolder.cpp
+  src/MainWindow/Ecosystem/Event.cpp
+  src/MainWindow/Ecosystem/Order.cpp
 )
 
 target_link_libraries(${target} Qt5::Widgets)

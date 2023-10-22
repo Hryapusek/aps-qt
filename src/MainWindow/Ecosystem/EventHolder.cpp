@@ -44,7 +44,7 @@ void EventHolder::processEvent(const Event &event)
   if (event.type() == EventType::ORDER_CREATED)
   {
     processOrderCreatedEvent(event);
-
+    
   }
 }
 

@@ -68,14 +68,14 @@ public:
     {
         if (StartupDialog->objectName().isEmpty())
             StartupDialog->setObjectName(QString::fromUtf8("StartupDialog"));
-        StartupDialog->resize(267, 285);
+        StartupDialog->resize(227, 285);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(StartupDialog->sizePolicy().hasHeightForWidth());
         StartupDialog->setSizePolicy(sizePolicy);
-        StartupDialog->setMinimumSize(QSize(267, 285));
-        StartupDialog->setMaximumSize(QSize(280, 285));
+        StartupDialog->setMinimumSize(QSize(227, 285));
+        StartupDialog->setMaximumSize(QSize(227, 287));
         verticalLayout_3 = new QVBoxLayout(StartupDialog);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_2 = new QVBoxLayout();
@@ -162,7 +162,7 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_4 = new QSpacerItem(0, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_4);
 
