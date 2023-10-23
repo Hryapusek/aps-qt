@@ -21,15 +21,16 @@ MainWindow::MainWindow() :
   InputParameters params
   {
     .nDevices = 1,
-    .nClients = 2,
-    .time = 1,
-    .bufferSize = 1,
+    .nClients = 5,
+    .time = 3,
+    .bufferSize = 5,
     .minDeviceTime = 2,
     .maxDeviceTime = 3,
-    .lambda = 0.9,
+    .lambda = 2,
   };
-  eventHolder = std::make_unique< EventHolder >(params);
-  QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder.get(), &EventHolder::step);
+  bufferGui_ = std::make_unique< BufferGui >(ui_->bufferTable, params.bufferSize);
+  eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get());
+  QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder_.get(), &EventHolder::step);
   #endif
 
 }
@@ -63,6 +64,7 @@ void MainWindow::execStartupWindow()
     .lambda = dialog->lambda(),
   };
 
-  eventHolder = std::make_unique< EventHolder >(params);
-  QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder.get(), &EventHolder::step);
+  bufferGui_ = std::make_unique< BufferGui >(ui_->bufferTable, params.bufferSize);
+  eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get());
+  QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder_.get(), &EventHolder::step);
 }

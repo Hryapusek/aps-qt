@@ -45,9 +45,9 @@ class Event
 {
 public:
   Event(EventType type, double time, Order order);
-  EventType type() const;
-  double time() const;
-  Order order() const;
+  [[nodiscard]] EventType type() const;
+  [[nodiscard]] double time() const;
+  [[nodiscard]] Order order() const;
   constexpr auto operator<=>(const Event &rhs) const noexcept
   {
     return this->time_ <=> rhs.time_;

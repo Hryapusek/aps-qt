@@ -27,7 +27,7 @@ class DeviceHolder
 public:
   DeviceHolder(int nDevices, double minProcessingTime, double maxProcessingTime);
   /// @return Time when processing will be finished
-  double processOrder(Order order, double time);
+  [[nodiscard]] double processOrder(Order order, double time);
   bool hasSpace(double time);
 
 private:

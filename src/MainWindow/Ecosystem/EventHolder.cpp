@@ -5,16 +5,20 @@
 #include <ranges>
 #include <cassert>
 
-EventHolder::EventHolder(const InputParameters &params)
+EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui) :
+  bufferGui_(bufferGui),
+  params_(params)
 {
-  params_ = params;
   deviceHolder_ = std::make_unique< DeviceHolder >(params_.nDevices, params_.minDeviceTime, params_.maxDeviceTime);
-  buffer_ = std::make_unique< Buffer >(params_.bufferSize);
+  buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_);
   eventsInterval_ = calcEventsInterval();
   std::cerr << "Interval: " << eventsInterval_ << '\n';
   for (const auto clientId : std::ranges::views::iota(0, params_.nClients))
   {
+    if (params_.time < clientId * eventsInterval_)
+      break;
     events_.insert(Event(EventType::ORDER_CREATED, clientId * eventsInterval_, Order::makeOrder(clientId)));
+    std::cerr << "Order name: " << events_.rbegin()->order().name() << '\n';
   }
   printEvents();
 }
@@ -61,6 +65,7 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
     if (newEventTime < params_.time)
     {
       auto newEventOrder = Order::makeOrder(event.order().clientId());
+      std::cerr << "ClientId " << event.order().clientId() << '\n';
       auto newEvent = Event(EventType::ORDER_CREATED, newEventTime, std::move(newEventOrder));
       events_.insert(std::move(newEvent));
     }

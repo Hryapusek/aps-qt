@@ -3,6 +3,7 @@ set(target aps)
 project(${target} LANGUAGES CXX)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_library(Fmt fmt REQUIRED)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -19,6 +20,9 @@ add_executable(${target}
   src/MainWindow/StartupDialog.cpp
   src/MainWindow/StartupDialog.hpp
 
+  src/MainWindow/BufferGui.hpp
+  src/MainWindow/BufferGui.cpp
+
   src/MainWindow/Ecosystem/Buffer.cpp
   src/MainWindow/Ecosystem/DeviceHolder.cpp
   src/MainWindow/Ecosystem/Event.cpp
@@ -26,4 +30,5 @@ add_executable(${target}
   src/MainWindow/Ecosystem/Order.cpp
 )
 
-target_link_libraries(${target} Qt5::Widgets)
+target_link_libraries(${target} Qt5::Widgets ${Fmt})
+target_include_directories(${target} PRIVATE ${Qt5Widgets_INCLUDE_DIRS})

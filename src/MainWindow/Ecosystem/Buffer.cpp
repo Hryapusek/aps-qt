@@ -1,8 +1,9 @@
 #include "Buffer.hpp"
 #include <iostream>
 
-Buffer::Buffer(int bufferSize) :
-  queue_(bufferSize)
+Buffer::Buffer(int bufferSize, BufferGui *bufferGui) :
+  queue_(bufferSize),
+  bufferGui_(bufferGui)
 {}
 
 void Buffer::push_back(Order order, double time)
@@ -11,13 +12,16 @@ void Buffer::push_back(Order order, double time)
   {
     auto orderToReject = queue_.front();
     queue_.pop_front();
-    queue_.push_back(std::move_if_noexcept(order));
+    queue_.push_back(order);
+    bufferGui_->pop_front();
+    bufferGui_->push_back(order);
     std::cerr << "Order rejected\n";
     // TODO notify that order was rejected
   }
   else
   {
-    queue_.push_back(std::move_if_noexcept(order));
+    queue_.push_back(order);
+    bufferGui_->push_back(order);
     std::cerr << "Order put in buffer " << queue_.size() << " " << queue_.empty() << '\n';
   }
 }
@@ -25,6 +29,7 @@ void Buffer::push_back(Order order, double time)
 void Buffer::pop_front(double time)
 {
   queue_.pop_front();
+  bufferGui_->pop_front();
 }
 
 const Order &Buffer::nextOrder(double time)
