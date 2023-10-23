@@ -15,7 +15,23 @@ MainWindow::MainWindow() :
   for (const int i: std::ranges::views::iota(0, ui_->splitter->count()))
     ui_->splitter->setCollapsible(i, false);
 
+  #ifdef _NDEBUG
   QTimer::singleShot(0, this, &MainWindow::execStartupWindow);
+  #else
+  InputParameters params
+  {
+    .nDevices = 1,
+    .nClients = 2,
+    .time = 1,
+    .bufferSize = 1,
+    .minDeviceTime = 2,
+    .maxDeviceTime = 3,
+    .lambda = 0.9,
+  };
+  eventHolder = std::make_unique< EventHolder >(params);
+  QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder.get(), &EventHolder::step);
+  #endif
+
 }
 
 MainWindow::~MainWindow()
@@ -47,5 +63,6 @@ void MainWindow::execStartupWindow()
     .lambda = dialog->lambda(),
   };
 
-  eventHolder = std::make_unique<EventHolder>(params);
+  eventHolder = std::make_unique< EventHolder >(params);
+  QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder.get(), &EventHolder::step);
 }

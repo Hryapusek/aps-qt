@@ -4,7 +4,7 @@ project(${target} LANGUAGES CXX)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -19,8 +19,10 @@ add_executable(${target}
   src/MainWindow/StartupDialog.cpp
   src/MainWindow/StartupDialog.hpp
 
-  src/MainWindow/Ecosystem/EventHolder.cpp
+  src/MainWindow/Ecosystem/Buffer.cpp
+  src/MainWindow/Ecosystem/DeviceHolder.cpp
   src/MainWindow/Ecosystem/Event.cpp
+  src/MainWindow/Ecosystem/EventHolder.cpp
   src/MainWindow/Ecosystem/Order.cpp
 )
 
