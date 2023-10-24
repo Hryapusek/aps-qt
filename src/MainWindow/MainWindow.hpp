@@ -20,6 +20,10 @@ public:
   MainWindow();
   ~MainWindow();
 
+private slots:
+  void step();
+  void finish();
+
 private:
   std::unique_ptr<Ui::MainWindow> ui_;
   std::unique_ptr<EventHolder> eventHolder_;

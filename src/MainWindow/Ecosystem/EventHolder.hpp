@@ -29,7 +29,6 @@ class EventHolder : public QObject
 public:
   EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui);
   void step();
-  void finalize();
   [[nodiscard]] bool isFinished() const;
 
 private:
@@ -41,6 +40,7 @@ private:
   DevicesGui *devicesGui_;
   EventsGui *eventsGui_;
   std::set< Event > events_;
+
   [[nodiscard]] double calcEventsInterval();
   void processEvent(const Event &event);
   void processOrderCreatedEvent(const Event &event);

@@ -1,9 +1,9 @@
 #include "EventHolder.hpp"
 #include <random>
 #include <cmath>
-#include <iostream>
 #include <ranges>
 #include <cassert>
+#include <iostream>
 
 EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui) :
   params_(params),
@@ -14,6 +14,7 @@ EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, De
   deviceHolder_ = std::make_unique< DeviceHolder >(params_.nDevices, params_.minDeviceTime, params_.maxDeviceTime);
   buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_, eventsGui_);
   eventsInterval_ = calcEventsInterval();
+  std::cout << "Interval: " << eventsInterval_ << '\n';
   for (const auto clientId : std::ranges::views::iota(0, params_.nClients))
   {
     if (params_.time < clientId * eventsInterval_)
@@ -29,6 +30,11 @@ void EventHolder::step()
   auto lastEvent = *events_.begin();
   events_.erase(events_.begin());
   processEvent(lastEvent);
+}
+
+bool EventHolder::isFinished() const
+{
+  return events_.empty();
 }
 
 double EventHolder::calcEventsInterval()
@@ -52,7 +58,7 @@ void EventHolder::processEvent(const Event &event)
 void EventHolder::processOrderCreatedEvent(const Event &event)
 {
   assert(("Event type must be OrderCreated", event.type() == EventType::ORDER_CREATED));
-  eventsGui_->addEvent(event.time(), event.order(), "ORDER CREATED");
+  eventsGui_->addEvent(event.time(), event.order(), "CREATED");
   { // Put another OrderCreated in array after nClients * eventsInterval_ time.
     // New orders must be generated every "eventsInterval_" time
     auto newEventTime = event.time() + params_.nClients * eventsInterval_;
@@ -93,13 +99,13 @@ double EventHolder::processOrder(Order order, double time)
 {
   auto finishTime = deviceHolder_->processOrder(order, time);
   devicesGui_->process(order);
-  eventsGui_->addEvent(time, order, "ORDER PUT IN DEVICE");
+  eventsGui_->addEvent(time, order, "PUT IN DEVICE");
   return finishTime;
 }
 
 void EventHolder::finishProcessing(Order order, double time)
 {
-  eventsGui_->addEvent(time, order, "ORDER OUT OF DEVICE");
+  eventsGui_->addEvent(time, order, "OUT OF DEVICE");
   devicesGui_->finishProcessing(order);
   eventsGui_->addSuccess();
 }

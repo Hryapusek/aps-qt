@@ -1,7 +1,6 @@
 #include "BufferGui.hpp"
 #include <ranges>
 #include <fmt/format.h>
-#include <iostream>
 
 BufferGui::BufferGui(QTableWidget *table, int bufferSize) :
   table_(table),
@@ -53,7 +52,6 @@ void BufferGui::push_back(Order order)
   auto orderItem = new QTableWidgetItem(QString());
   orderItem->setTextAlignment(Qt::AlignmentFlag::AlignCenter);
   orderItem->setFlags(orderItem->flags() & ~(Qt::ItemFlag::ItemIsEditable | Qt::ItemFlag::ItemIsSelectable));
-  std::cerr << order.name() << '\n';
   orderItem->setText(QString::fromStdString(order.name()));
   table_->setItem(pushIndex, Column::ORDER, orderItem);
   pushIndex = (pushIndex + 1) % size_;

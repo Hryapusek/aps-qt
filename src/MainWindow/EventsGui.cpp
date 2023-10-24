@@ -33,6 +33,8 @@ void EventsGui::addEvent(double time, Order order, std::string description)
     descrItem->setText(QString::fromStdString(description));
     table_->setItem(newRow, Column::DESCRIPTION, descrItem);
   }
+
+  table_->scrollToBottom();
 }
 
 void EventsGui::addSuccess()

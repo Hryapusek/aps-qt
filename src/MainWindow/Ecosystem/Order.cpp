@@ -1,5 +1,4 @@
 #include "Order.hpp"
-#include <iostream>
 
 std::map<Order::ClientId_t, Order::OrderId_t> Order::clientNextOrderId;
 
@@ -15,7 +14,6 @@ Order Order::makeOrder(int clientId)
     Order::clientNextOrderId[clientId] = 1;
     orderId = 0;
   }
-  std::cerr << "Order " << clientId << " " << orderId << '\n';
   return Order(clientId, orderId, "И" + std::to_string(clientId) + "_" + std::to_string(orderId));
 }
 

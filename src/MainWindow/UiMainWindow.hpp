@@ -14,6 +14,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -56,6 +57,10 @@ public:
     QSpacerItem *horizontalSpacer_4;
     QLabel *label_5;
     QSpinBox *calceledSpin;
+    QHBoxLayout *horizontalLayout_8;
+    QSpacerItem *horizontalSpacer_6;
+    QLabel *label_6;
+    QLineEdit *statusLine;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -209,6 +214,27 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_7);
 
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalSpacer_6 = new QSpacerItem(0, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_8->addItem(horizontalSpacer_6);
+
+        label_6 = new QLabel(centralwidget);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        horizontalLayout_8->addWidget(label_6);
+
+        statusLine = new QLineEdit(centralwidget);
+        statusLine->setObjectName(QString::fromUtf8("statusLine"));
+        statusLine->setMaximumSize(QSize(60, 16777215));
+        statusLine->setReadOnly(true);
+
+        horizontalLayout_8->addWidget(statusLine);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_8);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer);
@@ -289,8 +315,10 @@ public:
         ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = eventsTable->horizontalHeaderItem(2);
         ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\320\261\321\213\321\202\320\270\320\265", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Success:", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindow", "Canceled:", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Success", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Canceled", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Status", nullptr));
+        statusLine->setText(QCoreApplication::translate("MainWindow", "Working", nullptr));
         stepBtn->setText(QCoreApplication::translate("MainWindow", "Step", nullptr));
         autoBtn->setText(QCoreApplication::translate("MainWindow", "Auto", nullptr));
         resultsBtn->setText(QCoreApplication::translate("MainWindow", "Results", nullptr));
