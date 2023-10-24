@@ -23,12 +23,25 @@ add_executable(${target}
   src/MainWindow/BufferGui.hpp
   src/MainWindow/BufferGui.cpp
 
+  src/MainWindow/DevicesGui.hpp
+  src/MainWindow/DevicesGui.cpp
+
+  src/MainWindow/Ecosystem/Buffer.hpp
   src/MainWindow/Ecosystem/Buffer.cpp
+  
+  src/MainWindow/Ecosystem/DeviceHolder.hpp
   src/MainWindow/Ecosystem/DeviceHolder.cpp
+
+  src/MainWindow/Ecosystem/Event.hpp
   src/MainWindow/Ecosystem/Event.cpp
+
+  src/MainWindow/Ecosystem/EventHolder.hpp
   src/MainWindow/Ecosystem/EventHolder.cpp
+
+  src/MainWindow/Ecosystem/Order.hpp
   src/MainWindow/Ecosystem/Order.cpp
 )
 
 target_link_libraries(${target} Qt5::Widgets ${Fmt})
 target_include_directories(${target} PRIVATE ${Qt5Widgets_INCLUDE_DIRS})
+target_compile_options(${target} PRIVATE -Wall -Wextra)

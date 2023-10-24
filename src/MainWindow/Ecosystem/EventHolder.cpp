@@ -5,9 +5,10 @@
 #include <ranges>
 #include <cassert>
 
-EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui) :
+EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui) :
+  params_(params),
   bufferGui_(bufferGui),
-  params_(params)
+  devicesGui_(devicesGui)
 {
   deviceHolder_ = std::make_unique< DeviceHolder >(params_.nDevices, params_.minDeviceTime, params_.maxDeviceTime);
   buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_);
@@ -73,24 +74,27 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
   if (deviceHolder_->hasSpace(event.time()))
   {
     auto finishTime = deviceHolder_->processOrder(event.order(), event.time());
+    devicesGui_->process(event.order());
     Event deviceFinishedEvent = Event(EventType::DEVICE_FINISHED, finishTime, event.order());
     events_.insert(std::move(deviceFinishedEvent));
   }
   else
   {
-    buffer_->push_back(event.order(), event.time());
+    buffer_->addOrder(event.order(), event.time());
   }
 }
 
 void EventHolder::processDeviceFinishedEvent(const Event &event)
 {
   assert(("Event type must be DEVICE_FINISHED", event.type() == EventType::DEVICE_FINISHED));
-  if (!buffer_->empty()) // TODO fix putting order from buffer into device IOT instruction
+  devicesGui_->finishProcessing(event.order());
+  if (!buffer_->empty())
   {
     Order orderToProcess = buffer_->nextOrder(event.time());
-    buffer_->pop_front(event.time());
+    buffer_->moveOrder(event.time());
     auto finishTime = deviceHolder_->processOrder(orderToProcess, event.time());
-    Event deviceFinishedEvent = Event(EventType::DEVICE_FINISHED, finishTime, event.order());
+    devicesGui_->process(orderToProcess);
+    Event deviceFinishedEvent = Event(EventType::DEVICE_FINISHED, finishTime, orderToProcess);
     events_.insert(std::move(deviceFinishedEvent));
   }
 }

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "Ecosystem/EventHolder.hpp"
 #include "BufferGui.hpp"
+#include "DevicesGui.hpp"
 
 namespace Ui
 {
@@ -22,6 +23,7 @@ private:
   std::unique_ptr<Ui::MainWindow> ui_;
   std::unique_ptr<EventHolder> eventHolder_;
   std::unique_ptr<BufferGui> bufferGui_;
+  std::unique_ptr<DevicesGui> devicesGui_;
   void execStartupWindow();
 };
 

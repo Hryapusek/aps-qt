@@ -10,8 +10,8 @@ class Buffer
 public:
   Buffer(int bufferSize, BufferGui *bufferGui);
   /// @param time used only for statistics
-  void push_back(Order order, double time);
-  void pop_front(double time);
+  void addOrder(Order order, double time);
+  void moveOrder(double time);
   /// @param time used only for statistics
   [[nodiscard]] const Order &nextOrder(double time);
   [[nodiscard]] bool hasSpace() const noexcept;

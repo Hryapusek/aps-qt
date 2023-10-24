@@ -29,6 +29,11 @@ int Order::clientId() const
   return clientId_;
 }
 
+bool Order::operator==(const Order &rhs) const noexcept
+{
+  return this->clientId_ == rhs.clientId_ && this->orderId_ == rhs.orderId_;
+}
+
 Order::Order(ClientId_t clientNum, OrderId_t orderId, std::string name) :
   clientId_(clientNum),
   orderId_(orderId),
