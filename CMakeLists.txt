@@ -26,6 +26,9 @@ add_executable(${target}
   src/MainWindow/DevicesGui.hpp
   src/MainWindow/DevicesGui.cpp
 
+  src/MainWindow/EventsGui.hpp
+  src/MainWindow/EventsGui.cpp
+
   src/MainWindow/Ecosystem/Buffer.hpp
   src/MainWindow/Ecosystem/Buffer.cpp
   

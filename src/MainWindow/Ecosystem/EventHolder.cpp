@@ -5,23 +5,21 @@
 #include <ranges>
 #include <cassert>
 
-EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui) :
+EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui) :
   params_(params),
   bufferGui_(bufferGui),
-  devicesGui_(devicesGui)
+  devicesGui_(devicesGui),
+  eventsGui_(eventsGui)
 {
   deviceHolder_ = std::make_unique< DeviceHolder >(params_.nDevices, params_.minDeviceTime, params_.maxDeviceTime);
-  buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_);
+  buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_, eventsGui_);
   eventsInterval_ = calcEventsInterval();
-  std::cerr << "Interval: " << eventsInterval_ << '\n';
   for (const auto clientId : std::ranges::views::iota(0, params_.nClients))
   {
     if (params_.time < clientId * eventsInterval_)
       break;
     events_.insert(Event(EventType::ORDER_CREATED, clientId * eventsInterval_, Order::makeOrder(clientId)));
-    std::cerr << "Order name: " << events_.rbegin()->order().name() << '\n';
   }
-  printEvents();
 }
 
 void EventHolder::step()
@@ -31,7 +29,6 @@ void EventHolder::step()
   auto lastEvent = *events_.begin();
   events_.erase(events_.begin());
   processEvent(lastEvent);
-  printEvents();
 }
 
 double EventHolder::calcEventsInterval()
@@ -52,29 +49,23 @@ void EventHolder::processEvent(const Event &event)
     processDeviceFinishedEvent(event);
 }
 
-void EventHolder::rejectOrder(const Order &order)
-{
-  std::cerr << "__func__ - Implement me\n";
-}
-
 void EventHolder::processOrderCreatedEvent(const Event &event)
 {
   assert(("Event type must be OrderCreated", event.type() == EventType::ORDER_CREATED));
+  eventsGui_->addEvent(event.time(), event.order(), "ORDER CREATED");
   { // Put another OrderCreated in array after nClients * eventsInterval_ time.
     // New orders must be generated every "eventsInterval_" time
     auto newEventTime = event.time() + params_.nClients * eventsInterval_;
     if (newEventTime < params_.time)
     {
       auto newEventOrder = Order::makeOrder(event.order().clientId());
-      std::cerr << "ClientId " << event.order().clientId() << '\n';
       auto newEvent = Event(EventType::ORDER_CREATED, newEventTime, std::move(newEventOrder));
       events_.insert(std::move(newEvent));
     }
   }
   if (deviceHolder_->hasSpace(event.time()))
   {
-    auto finishTime = deviceHolder_->processOrder(event.order(), event.time());
-    devicesGui_->process(event.order());
+    auto finishTime = processOrder(event.order(), event.time());
     Event deviceFinishedEvent = Event(EventType::DEVICE_FINISHED, finishTime, event.order());
     events_.insert(std::move(deviceFinishedEvent));
   }
@@ -87,23 +78,28 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
 void EventHolder::processDeviceFinishedEvent(const Event &event)
 {
   assert(("Event type must be DEVICE_FINISHED", event.type() == EventType::DEVICE_FINISHED));
-  devicesGui_->finishProcessing(event.order());
+  finishProcessing(event.order(), event.time());
   if (!buffer_->empty())
   {
-    Order orderToProcess = buffer_->nextOrder(event.time());
-    buffer_->moveOrder(event.time());
-    auto finishTime = deviceHolder_->processOrder(orderToProcess, event.time());
-    devicesGui_->process(orderToProcess);
+    Order orderToProcess = buffer_->nextOrder();
+    buffer_->popOrder(event.time());
+    auto finishTime = processOrder(orderToProcess, event.time());
     Event deviceFinishedEvent = Event(EventType::DEVICE_FINISHED, finishTime, orderToProcess);
     events_.insert(std::move(deviceFinishedEvent));
   }
 }
 
-void EventHolder::printEvents()
+double EventHolder::processOrder(Order order, double time)
 {
-  using namespace std::ranges;
-  std::copy_n((events_ | views::transform([](const Event &e) {
-    return e.type().to_string();
-  })).begin(), std::min(3ul, events_.size()), std::ostream_iterator< std::string >(std::cerr, " "));
-  std::cerr << '\n';
+  auto finishTime = deviceHolder_->processOrder(order, time);
+  devicesGui_->process(order);
+  eventsGui_->addEvent(time, order, "ORDER PUT IN DEVICE");
+  return finishTime;
+}
+
+void EventHolder::finishProcessing(Order order, double time)
+{
+  eventsGui_->addEvent(time, order, "ORDER OUT OF DEVICE");
+  devicesGui_->finishProcessing(order);
+  eventsGui_->addSuccess();
 }

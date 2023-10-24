@@ -6,6 +6,7 @@
 #include "Buffer.hpp"
 #include "../BufferGui.hpp"
 #include "../DevicesGui.hpp"
+#include "../EventsGui.hpp"
 #include <set>
 #include <memory>
 #include <functional>
@@ -26,7 +27,7 @@ class EventHolder : public QObject
 {
   Q_OBJECT
 public:
-  EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui);
+  EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui);
   void step();
   void finalize();
   [[nodiscard]] bool isFinished() const;
@@ -38,13 +39,14 @@ private:
   std::unique_ptr<Buffer> buffer_;
   BufferGui *bufferGui_;
   DevicesGui *devicesGui_;
+  EventsGui *eventsGui_;
   std::set< Event > events_;
   [[nodiscard]] double calcEventsInterval();
   void processEvent(const Event &event);
-  void rejectOrder(const Order &order);
   void processOrderCreatedEvent(const Event &event);
   void processDeviceFinishedEvent(const Event &event);
-  void printEvents();
+  double processOrder(Order order, double time);
+  void finishProcessing(Order order, double time);
 };
 
 #endif

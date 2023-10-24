@@ -120,7 +120,7 @@
               </column>
               <column>
                <property name="text">
-                <string>Элемент</string>
+                <string>Заявка</string>
                </property>
               </column>
               <column>
@@ -162,30 +162,21 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="succededLine">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QSpinBox" name="successSpin">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>60</width>
                 <height>0</height>
                </size>
               </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
-              <property name="text">
-               <string>0</string>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="maximum">
+               <number>99999</number>
               </property>
              </widget>
             </item>
@@ -214,21 +205,21 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="canceledLine">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="maximumSize">
+             <widget class="QSpinBox" name="calceledSpin">
+              <property name="minimumSize">
                <size>
                 <width>60</width>
-                <height>16777215</height>
+                <height>0</height>
                </size>
               </property>
-              <property name="text">
-               <string>0</string>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="maximum">
+               <number>99999</number>
               </property>
              </widget>
             </item>

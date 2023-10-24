@@ -5,6 +5,7 @@
 #include "Ecosystem/EventHolder.hpp"
 #include "BufferGui.hpp"
 #include "DevicesGui.hpp"
+#include "EventsGui.hpp"
 
 namespace Ui
 {
@@ -24,6 +25,7 @@ private:
   std::unique_ptr<EventHolder> eventHolder_;
   std::unique_ptr<BufferGui> bufferGui_;
   std::unique_ptr<DevicesGui> devicesGui_;
+  std::unique_ptr<EventsGui> eventsGui_;
   void execStartupWindow();
 };
 

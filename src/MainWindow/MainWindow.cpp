@@ -28,12 +28,12 @@ MainWindow::MainWindow() :
     .maxDeviceTime = 2,
     .lambda = 2,
   };
+  eventsGui_ = std::make_unique< EventsGui >(ui_->eventsTable, ui_->successSpin, ui_->calceledSpin);
   bufferGui_ = std::make_unique< BufferGui >(ui_->bufferTable, params.bufferSize);
   devicesGui_ = std::make_unique< DevicesGui >(ui_->devicesTable, params.nDevices);
-  eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get(), devicesGui_.get());
+  eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get(), devicesGui_.get(), eventsGui_.get());
   QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder_.get(), &EventHolder::step);
   #endif
-
 }
 
 MainWindow::~MainWindow()
@@ -65,8 +65,9 @@ void MainWindow::execStartupWindow()
     .lambda = dialog->lambda(),
   };
 
+  eventsGui_ = std::make_unique< EventsGui >(ui_->eventsTable, ui_->successSpin, ui_->calceledSpin);
   bufferGui_ = std::make_unique< BufferGui >(ui_->bufferTable, params.bufferSize);
   devicesGui_ = std::make_unique< DevicesGui >(ui_->devicesTable, params.nDevices);
-  eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get(), devicesGui_.get());
+  eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get(), devicesGui_.get(), eventsGui_.get());
   QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder_.get(), &EventHolder::step);
 }

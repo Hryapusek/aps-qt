@@ -14,11 +14,11 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
@@ -51,11 +51,11 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QSpacerItem *horizontalSpacer_3;
     QLabel *label_2;
-    QLineEdit *succededLine;
+    QSpinBox *successSpin;
     QHBoxLayout *horizontalLayout_7;
     QSpacerItem *horizontalSpacer_4;
     QLabel *label_5;
-    QLineEdit *canceledLine;
+    QSpinBox *calceledSpin;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -174,18 +174,14 @@ public:
 
         horizontalLayout_4->addWidget(label_2);
 
-        succededLine = new QLineEdit(centralwidget);
-        succededLine->setObjectName(QString::fromUtf8("succededLine"));
-        succededLine->setEnabled(true);
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(succededLine->sizePolicy().hasHeightForWidth());
-        succededLine->setSizePolicy(sizePolicy);
-        succededLine->setMinimumSize(QSize(0, 0));
-        succededLine->setMaximumSize(QSize(60, 16777215));
+        successSpin = new QSpinBox(centralwidget);
+        successSpin->setObjectName(QString::fromUtf8("successSpin"));
+        successSpin->setMinimumSize(QSize(60, 0));
+        successSpin->setReadOnly(true);
+        successSpin->setButtonSymbols(QAbstractSpinBox::NoButtons);
+        successSpin->setMaximum(99999);
 
-        horizontalLayout_4->addWidget(succededLine);
+        horizontalLayout_4->addWidget(successSpin);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
@@ -201,13 +197,14 @@ public:
 
         horizontalLayout_7->addWidget(label_5);
 
-        canceledLine = new QLineEdit(centralwidget);
-        canceledLine->setObjectName(QString::fromUtf8("canceledLine"));
-        sizePolicy.setHeightForWidth(canceledLine->sizePolicy().hasHeightForWidth());
-        canceledLine->setSizePolicy(sizePolicy);
-        canceledLine->setMaximumSize(QSize(60, 16777215));
+        calceledSpin = new QSpinBox(centralwidget);
+        calceledSpin->setObjectName(QString::fromUtf8("calceledSpin"));
+        calceledSpin->setMinimumSize(QSize(60, 0));
+        calceledSpin->setReadOnly(true);
+        calceledSpin->setButtonSymbols(QAbstractSpinBox::NoButtons);
+        calceledSpin->setMaximum(99999);
 
-        horizontalLayout_7->addWidget(canceledLine);
+        horizontalLayout_7->addWidget(calceledSpin);
 
 
         verticalLayout_2->addLayout(horizontalLayout_7);
@@ -289,13 +286,11 @@ public:
         QTableWidgetItem *___qtablewidgetitem6 = eventsTable->horizontalHeaderItem(0);
         ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\265\320\274\321\217", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = eventsTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "\320\255\320\273\320\265\320\274\320\265\320\275\321\202", nullptr));
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = eventsTable->horizontalHeaderItem(2);
         ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\320\261\321\213\321\202\320\270\320\265", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Success:", nullptr));
-        succededLine->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Canceled:", nullptr));
-        canceledLine->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         stepBtn->setText(QCoreApplication::translate("MainWindow", "Step", nullptr));
         autoBtn->setText(QCoreApplication::translate("MainWindow", "Auto", nullptr));
         resultsBtn->setText(QCoreApplication::translate("MainWindow", "Results", nullptr));
