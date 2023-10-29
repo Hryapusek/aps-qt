@@ -23,7 +23,7 @@ struct InputParameters
   double lambda = 0.5;
 };
 
-class EventHolder : public QObject
+class EventHolder: public QObject
 {
   Q_OBJECT
 public:
@@ -34,8 +34,8 @@ public:
 private:
   InputParameters params_;
   double eventsInterval_;
-  std::unique_ptr<DeviceHolder> deviceHolder_;
-  std::unique_ptr<Buffer> buffer_;
+  std::unique_ptr< DeviceHolder > deviceHolder_;
+  std::unique_ptr< Buffer > buffer_;
   BufferGui *bufferGui_;
   DevicesGui *devicesGui_;
   EventsGui *eventsGui_;

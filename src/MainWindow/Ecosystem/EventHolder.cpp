@@ -71,6 +71,8 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
   }
   if (deviceHolder_->hasSpace(event.time()))
   {
+    buffer_->addOrder(event.order(), event.time());
+    buffer_->popOrder(event.time());
     auto finishTime = processOrder(event.order(), event.time());
     Event deviceFinishedEvent = Event(EventType::DEVICE_FINISHED, finishTime, event.order());
     events_.insert(std::move(deviceFinishedEvent));
