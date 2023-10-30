@@ -40,7 +40,7 @@ double Statistics::getAvgTimeInSystem() const
 
 double Statistics::getDeviceLoad() const
 {
-  return devicesTime_/(lastFinishedOrderTime_*nDevices_);
+  return devicesTime_ / (lastFinishedOrderTime_ * nDevices_);
 }
 
 void Statistics::addAvgTime(const Order &order, double finishTime)
