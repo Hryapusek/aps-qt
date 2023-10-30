@@ -14,6 +14,7 @@ void Buffer::addOrder(Order order, double time)
     queue_.pop_front();
     eventsGui_->addEvent(time, orderToReject, "REJECTED");
     eventsGui_->addCanceled();
+    emit orderRejected(orderToReject, time);
     queue_.push_back(order);
     eventsGui_->addEvent(time, order, "PUT IN BUFFER");
     bufferGui_->pop_front();
@@ -36,7 +37,7 @@ void Buffer::popOrder(double time)
 
 const Order &Buffer::nextOrder()
 {
-  if (queue_.empty())
+  if (queue_.empty()) [[unlikely]]
     throw std::exception();
   return queue_.front();
 }

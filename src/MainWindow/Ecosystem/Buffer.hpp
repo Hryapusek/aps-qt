@@ -3,12 +3,16 @@
 
 #include "Order.hpp"
 
+#include <QObject>
 #include <boost/circular_buffer.hpp>
 #include "../BufferGui.hpp"
 #include "../EventsGui.hpp"
+#include "Statistics.hpp"
 
-class Buffer
+class Buffer : public QObject
 {
+  Q_OBJECT
+
 public:
   Buffer(int bufferSize, BufferGui *bufferGui, EventsGui *eventsGui);
   /// @param time used only for statistics
@@ -18,6 +22,9 @@ public:
   [[nodiscard]] const Order &nextOrder();
   [[nodiscard]] bool hasSpace() const noexcept;
   [[nodiscard]] bool empty() const noexcept;
+
+signals:
+  void orderRejected(Order order, double rejectTime);
 
 private:
   boost::circular_buffer<Order> queue_;

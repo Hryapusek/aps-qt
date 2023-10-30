@@ -14,6 +14,8 @@ set(CMAKE_AUTOUIC ON)
 add_executable(${target}
   src/MainWindow/main.cpp
 
+  src/MainWindow/UiMainWindow.hpp
+
   src/MainWindow/MainWindow.cpp
   src/MainWindow/MainWindow.hpp
 
@@ -43,6 +45,9 @@ add_executable(${target}
 
   src/MainWindow/Ecosystem/Order.hpp
   src/MainWindow/Ecosystem/Order.cpp
+
+  src/MainWindow/Ecosystem/Statistics.hpp
+  src/MainWindow/Ecosystem/Statistics.cpp
 )
 
 target_link_libraries(${target} Qt5::Widgets ${Fmt})

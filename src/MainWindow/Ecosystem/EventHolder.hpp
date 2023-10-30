@@ -4,6 +4,7 @@
 #include "Event.hpp"
 #include "DeviceHolder.hpp"
 #include "Buffer.hpp"
+#include "Statistics.hpp"
 #include "../BufferGui.hpp"
 #include "../DevicesGui.hpp"
 #include "../EventsGui.hpp"
@@ -30,12 +31,16 @@ public:
   EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui);
   void step();
   [[nodiscard]] bool isFinished() const;
+  double getRejectProbability() const;
+  double getAvgTimeInSystem() const;
+  double getDeviceLoad() const;
 
 private:
   InputParameters params_;
   double eventsInterval_;
   std::unique_ptr< DeviceHolder > deviceHolder_;
   std::unique_ptr< Buffer > buffer_;
+  std::unique_ptr< Statistics > stats_;
   BufferGui *bufferGui_;
   DevicesGui *devicesGui_;
   EventsGui *eventsGui_;
@@ -45,7 +50,7 @@ private:
   void processEvent(const Event &event);
   void processOrderCreatedEvent(const Event &event);
   void processDeviceFinishedEvent(const Event &event);
-  double processOrder(Order order, double time);
+  [[nodiscard]] double processOrder(Order order, double time);
   void finishProcessing(Order order, double time);
 };
 

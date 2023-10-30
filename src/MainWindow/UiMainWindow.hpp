@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -61,6 +62,18 @@ public:
     QSpacerItem *horizontalSpacer_6;
     QLabel *label_6;
     QLineEdit *statusLine;
+    QHBoxLayout *horizontalLayout_10;
+    QSpacerItem *horizontalSpacer_8;
+    QLabel *label_9;
+    QDoubleSpinBox *calcelProbSpin;
+    QHBoxLayout *horizontalLayout_17;
+    QSpacerItem *horizontalSpacer_16;
+    QLabel *label_17;
+    QDoubleSpinBox *avgTimeSpin;
+    QHBoxLayout *horizontalLayout_23;
+    QSpacerItem *horizontalSpacer_22;
+    QLabel *label_23;
+    QDoubleSpinBox *deviceLoadSpin;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -235,6 +248,69 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_8);
 
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        horizontalSpacer_8 = new QSpacerItem(0, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_10->addItem(horizontalSpacer_8);
+
+        label_9 = new QLabel(centralwidget);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        horizontalLayout_10->addWidget(label_9);
+
+        calcelProbSpin = new QDoubleSpinBox(centralwidget);
+        calcelProbSpin->setObjectName(QString::fromUtf8("calcelProbSpin"));
+        calcelProbSpin->setReadOnly(true);
+        calcelProbSpin->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+        horizontalLayout_10->addWidget(calcelProbSpin);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_10);
+
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
+        horizontalSpacer_16 = new QSpacerItem(0, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_17->addItem(horizontalSpacer_16);
+
+        label_17 = new QLabel(centralwidget);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        horizontalLayout_17->addWidget(label_17);
+
+        avgTimeSpin = new QDoubleSpinBox(centralwidget);
+        avgTimeSpin->setObjectName(QString::fromUtf8("avgTimeSpin"));
+        avgTimeSpin->setReadOnly(true);
+        avgTimeSpin->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+        horizontalLayout_17->addWidget(avgTimeSpin);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_17);
+
+        horizontalLayout_23 = new QHBoxLayout();
+        horizontalLayout_23->setObjectName(QString::fromUtf8("horizontalLayout_23"));
+        horizontalSpacer_22 = new QSpacerItem(0, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_23->addItem(horizontalSpacer_22);
+
+        label_23 = new QLabel(centralwidget);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+
+        horizontalLayout_23->addWidget(label_23);
+
+        deviceLoadSpin = new QDoubleSpinBox(centralwidget);
+        deviceLoadSpin->setObjectName(QString::fromUtf8("deviceLoadSpin"));
+        deviceLoadSpin->setReadOnly(true);
+        deviceLoadSpin->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+        horizontalLayout_23->addWidget(deviceLoadSpin);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_23);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer);
@@ -319,6 +395,9 @@ public:
         label_5->setText(QCoreApplication::translate("MainWindow", "Canceled", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Status", nullptr));
         statusLine->setText(QCoreApplication::translate("MainWindow", "Working", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "P Calcel", nullptr));
+        label_17->setText(QCoreApplication::translate("MainWindow", "Avg T", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "Device load", nullptr));
         stepBtn->setText(QCoreApplication::translate("MainWindow", "Step", nullptr));
         autoBtn->setText(QCoreApplication::translate("MainWindow", "Auto", nullptr));
         resultsBtn->setText(QCoreApplication::translate("MainWindow", "Results", nullptr));

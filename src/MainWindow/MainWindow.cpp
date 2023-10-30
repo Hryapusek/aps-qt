@@ -42,17 +42,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::step()
 {
+  if (eventHolder_->isFinished())
+  {
+    ui_->statusLine->setText(QString::fromStdString("Finished"));
+    return;
+  }
   eventHolder_->step();
+  updateStatistics();
   if (eventHolder_->isFinished())
     ui_->statusLine->setText(QString::fromStdString("Finished"));
 }
 
 void MainWindow::finish()
 {
+  if (eventHolder_->isFinished())
+  {
+    ui_->statusLine->setText(QString::fromStdString("Finished"));
+    return;
+  }
   while (!eventHolder_->isFinished())
   {
     eventHolder_->step();
+    updateStatistics();
   }
+  ui_->statusLine->setText(QString::fromStdString("Finished"));
 }
 
 void MainWindow::execStartupWindow()
@@ -86,4 +99,11 @@ void MainWindow::execStartupWindow()
   devicesGui_ = std::make_unique< DevicesGui >(ui_->devicesTable, params.nDevices);
   eventHolder_ = std::make_unique< EventHolder >(params, bufferGui_.get(), devicesGui_.get(), eventsGui_.get());
   QObject::connect(ui_->stepBtn, &QPushButton::clicked, eventHolder_.get(), &EventHolder::step);
+}
+
+void MainWindow::updateStatistics()
+{
+  ui_->calcelProbSpin->setValue(eventHolder_->getRejectProbability());
+  ui_->avgTimeSpin->setValue(eventHolder_->getAvgTimeInSystem());
+  ui_->deviceLoadSpin->setValue(eventHolder_->getDeviceLoad());
 }

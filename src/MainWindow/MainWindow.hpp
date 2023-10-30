@@ -31,6 +31,7 @@ private:
   std::unique_ptr<DevicesGui> devicesGui_;
   std::unique_ptr<EventsGui> eventsGui_;
   void execStartupWindow();
+  void updateStatistics();
 };
 
 #endif
