@@ -10,10 +10,12 @@ public:
   using ClientId_t = int;
   using OrderId_t = int;
 
-  static Order makeOrder(int clientId);
+  static Order makeOrder(int clientId, double creationTime);
 
   const std::string &name() const;
   int clientId() const;
+
+  double creationTime() const;
 
   bool operator==(const Order &rhs) const noexcept;
 
@@ -22,7 +24,8 @@ private:
   ClientId_t clientId_;
   OrderId_t orderId_;
   std::string name_;
-  Order(int clientId, OrderId_t orderId, std::string name);
+  double creationTime_;
+  Order(int clientId, OrderId_t orderId, std::string name, double creationTime);
 };
 
 #endif
