@@ -5,8 +5,8 @@
 
 #include <QObject>
 #include <boost/circular_buffer.hpp>
-#include "../BufferGui.hpp"
-#include "../EventsGui.hpp"
+#include "MainWindow/GUI/BufferGui.hpp"
+#include "MainWindow/GUI/EventsGui.hpp"
 #include "Statistics.hpp"
 
 class Buffer : public QObject

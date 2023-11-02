@@ -63,6 +63,38 @@
               </column>
              </widget>
             </item>
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Источники&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="clientsTable">
+              <property name="minimumSize">
+               <size>
+                <width>10</width>
+                <height>0</height>
+               </size>
+              </property>
+              <column>
+               <property name="text">
+                <string>Индекс</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Время</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Имя</string>
+               </property>
+              </column>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="verticalLayoutWidget_2">

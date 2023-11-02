@@ -103,7 +103,7 @@ public:
         devicesSpin->setMinimumSize(QSize(60, 0));
         devicesSpin->setBaseSize(QSize(0, 0));
         devicesSpin->setMinimum(1);
-        devicesSpin->setMaximum(10);
+        devicesSpin->setMaximum(90);
 
         horizontalLayout->addWidget(devicesSpin);
 
@@ -128,7 +128,7 @@ public:
         clientsSpin->setMinimumSize(QSize(60, 0));
         clientsSpin->setBaseSize(QSize(0, 0));
         clientsSpin->setMinimum(1);
-        clientsSpin->setMaximum(10);
+        clientsSpin->setMaximum(90);
 
         horizontalLayout_2->addWidget(clientsSpin);
 
@@ -153,7 +153,7 @@ public:
         timeSpin->setMinimumSize(QSize(60, 0));
         timeSpin->setBaseSize(QSize(0, 0));
         timeSpin->setMinimum(1);
-        timeSpin->setMaximum(10);
+        timeSpin->setMaximum(1000);
 
         horizontalLayout_3->addWidget(timeSpin);
 
@@ -174,14 +174,14 @@ public:
         bufferSpin = new QSpinBox(StartupDialog);
         bufferSpin->setObjectName(QString::fromUtf8("bufferSpin"));
         bufferSpin->setMinimum(1);
-        bufferSpin->setMaximum(10);
+        bufferSpin->setMaximum(1000);
 
         horizontalLayout_4->addWidget(bufferSpin);
 
         bufferSlider = new QSlider(StartupDialog);
         bufferSlider->setObjectName(QString::fromUtf8("bufferSlider"));
         bufferSlider->setMinimum(1);
-        bufferSlider->setMaximum(10);
+        bufferSlider->setMaximum(1000);
         bufferSlider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_4->addWidget(bufferSlider);
@@ -249,7 +249,7 @@ public:
         lambdaSpin = new QDoubleSpinBox(StartupDialog);
         lambdaSpin->setObjectName(QString::fromUtf8("lambdaSpin"));
         lambdaSpin->setMinimum(0.010000000000000);
-        lambdaSpin->setMaximum(10.000000000000000);
+        lambdaSpin->setMaximum(100.000000000000000);
         lambdaSpin->setSingleStep(0.100000000000000);
 
         horizontalLayout_7->addWidget(lambdaSpin);

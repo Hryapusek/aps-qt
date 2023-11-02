@@ -22,14 +22,17 @@ add_executable(${target}
   src/MainWindow/StartupDialog.cpp
   src/MainWindow/StartupDialog.hpp
 
-  src/MainWindow/BufferGui.hpp
-  src/MainWindow/BufferGui.cpp
+  src/MainWindow/GUI/BufferGui.hpp
+  src/MainWindow/GUI/BufferGui.cpp
 
-  src/MainWindow/DevicesGui.hpp
-  src/MainWindow/DevicesGui.cpp
+  src/MainWindow/GUI/DevicesGui.hpp
+  src/MainWindow/GUI/DevicesGui.cpp
 
-  src/MainWindow/EventsGui.hpp
-  src/MainWindow/EventsGui.cpp
+  src/MainWindow/GUI/ClientsGui.hpp
+  src/MainWindow/GUI/ClientsGui.cpp
+
+  src/MainWindow/GUI/EventsGui.hpp
+  src/MainWindow/GUI/EventsGui.cpp
 
   src/MainWindow/Ecosystem/Buffer.hpp
   src/MainWindow/Ecosystem/Buffer.cpp
@@ -51,5 +54,6 @@ add_executable(${target}
 )
 
 target_link_libraries(${target} Qt5::Widgets ${Fmt})
-target_include_directories(${target} PRIVATE ${Qt5Widgets_INCLUDE_DIRS})
+target_include_directories(${target} PRIVATE ${Qt5Widgets_INCLUDE_DIRS} src)
 target_compile_options(${target} PRIVATE -Wall -Wextra)
+target_compile_definitions(${target} PRIVATE _NDEBUG)

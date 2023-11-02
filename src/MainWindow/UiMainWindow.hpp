@@ -41,6 +41,8 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLabel *label;
     QTableWidget *bufferTable;
+    QLabel *label_4;
+    QTableWidget *clientsTable;
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_3;
@@ -126,6 +128,25 @@ public:
 
         verticalLayout_3->addWidget(bufferTable);
 
+        label_4 = new QLabel(verticalLayoutWidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        verticalLayout_3->addWidget(label_4);
+
+        clientsTable = new QTableWidget(verticalLayoutWidget);
+        if (clientsTable->columnCount() < 3)
+            clientsTable->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        clientsTable->setHorizontalHeaderItem(0, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        clientsTable->setHorizontalHeaderItem(1, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        clientsTable->setHorizontalHeaderItem(2, __qtablewidgetitem6);
+        clientsTable->setObjectName(QString::fromUtf8("clientsTable"));
+        clientsTable->setMinimumSize(QSize(10, 0));
+
+        verticalLayout_3->addWidget(clientsTable);
+
         splitter->addWidget(verticalLayoutWidget);
         verticalLayoutWidget_2 = new QWidget(splitter);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
@@ -140,10 +161,10 @@ public:
         devicesTable = new QTableWidget(verticalLayoutWidget_2);
         if (devicesTable->columnCount() < 2)
             devicesTable->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        devicesTable->setHorizontalHeaderItem(0, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        devicesTable->setHorizontalHeaderItem(1, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        devicesTable->setHorizontalHeaderItem(0, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        devicesTable->setHorizontalHeaderItem(1, __qtablewidgetitem8);
         devicesTable->setObjectName(QString::fromUtf8("devicesTable"));
         devicesTable->setMinimumSize(QSize(10, 0));
 
@@ -163,12 +184,12 @@ public:
         eventsTable = new QTableWidget(layoutWidget);
         if (eventsTable->columnCount() < 3)
             eventsTable->setColumnCount(3);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        eventsTable->setHorizontalHeaderItem(0, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        eventsTable->setHorizontalHeaderItem(1, __qtablewidgetitem7);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        eventsTable->setHorizontalHeaderItem(2, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        eventsTable->setHorizontalHeaderItem(0, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        eventsTable->setHorizontalHeaderItem(1, __qtablewidgetitem10);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        eventsTable->setHorizontalHeaderItem(2, __qtablewidgetitem11);
         eventsTable->setObjectName(QString::fromUtf8("eventsTable"));
         eventsTable->setMinimumSize(QSize(10, 0));
 
@@ -379,18 +400,25 @@ public:
         ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = bufferTable->horizontalHeaderItem(3);
         ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\273\321\203\321\207\320\265\320\275\320\270\320\265", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "<b>Devices</b>", nullptr));
-        QTableWidgetItem *___qtablewidgetitem4 = devicesTable->horizontalHeaderItem(0);
+        label_4->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">\320\230\321\201\321\202\320\276\321\207\320\275\320\270\320\272\320\270</span></p></body></html>", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = clientsTable->horizontalHeaderItem(0);
         ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "\320\230\320\275\320\264\320\265\320\272\321\201", nullptr));
-        QTableWidgetItem *___qtablewidgetitem5 = devicesTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = clientsTable->horizontalHeaderItem(1);
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\265\320\274\321\217", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = clientsTable->horizontalHeaderItem(2);
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "\320\230\320\274\321\217", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "<b>Devices</b>", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = devicesTable->horizontalHeaderItem(0);
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "\320\230\320\275\320\264\320\265\320\272\321\201", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = devicesTable->horizontalHeaderItem(1);
+        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "<b>\320\241\320\276\320\261\321\213\321\202\320\270\321\217</b>", nullptr));
-        QTableWidgetItem *___qtablewidgetitem6 = eventsTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\265\320\274\321\217", nullptr));
-        QTableWidgetItem *___qtablewidgetitem7 = eventsTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
-        QTableWidgetItem *___qtablewidgetitem8 = eventsTable->horizontalHeaderItem(2);
-        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\320\261\321\213\321\202\320\270\320\265", nullptr));
+        QTableWidgetItem *___qtablewidgetitem9 = eventsTable->horizontalHeaderItem(0);
+        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\265\320\274\321\217", nullptr));
+        QTableWidgetItem *___qtablewidgetitem10 = eventsTable->horizontalHeaderItem(1);
+        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "\320\227\320\260\321\217\320\262\320\272\320\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem11 = eventsTable->horizontalHeaderItem(2);
+        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\320\261\321\213\321\202\320\270\320\265", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Success", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Canceled", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "Status", nullptr));

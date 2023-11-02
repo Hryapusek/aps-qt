@@ -2,7 +2,7 @@
 #define BUFFER_GUI_HPP
 
 #include <QTableWidget>
-#include "Ecosystem/Order.hpp"
+#include "MainWindow/Ecosystem/Order.hpp"
 
 class BufferGui
 {

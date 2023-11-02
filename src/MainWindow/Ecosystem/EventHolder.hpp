@@ -5,9 +5,10 @@
 #include "DeviceHolder.hpp"
 #include "Buffer.hpp"
 #include "Statistics.hpp"
-#include "../BufferGui.hpp"
-#include "../DevicesGui.hpp"
-#include "../EventsGui.hpp"
+#include "MainWindow/GUI/BufferGui.hpp"
+#include "MainWindow/GUI/DevicesGui.hpp"
+#include "MainWindow/GUI/EventsGui.hpp"
+#include "MainWindow/GUI/ClientsGui.hpp"
 #include <set>
 #include <memory>
 #include <functional>
@@ -28,7 +29,7 @@ class EventHolder: public QObject
 {
   Q_OBJECT
 public:
-  EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui);
+  EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui, ClientsGui *clientsGui);
   void step();
   [[nodiscard]] bool isFinished() const;
   double getRejectProbability() const;
@@ -44,6 +45,7 @@ private:
   BufferGui *bufferGui_;
   DevicesGui *devicesGui_;
   EventsGui *eventsGui_;
+  ClientsGui *clientsGui_;
   std::set< Event > events_;
 
   [[nodiscard]] double calcEventsInterval();

@@ -5,11 +5,12 @@
 #include <cassert>
 #include <iostream>
 
-EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui) :
+EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, DevicesGui *devicesGui, EventsGui *eventsGui, ClientsGui *clientsGui) :
   params_(params),
   bufferGui_(bufferGui),
   devicesGui_(devicesGui),
-  eventsGui_(eventsGui)
+  eventsGui_(eventsGui),
+  clientsGui_(clientsGui)
 {
   deviceHolder_ = std::make_unique< DeviceHolder >(params_.nDevices, params_.minDeviceTime, params_.maxDeviceTime);
   buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_, eventsGui_);
@@ -17,7 +18,7 @@ EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, De
   QObject::connect(buffer_.get(), &Buffer::orderRejected, stats_.get(), &Statistics::addRejected);
   eventsInterval_ = calcEventsInterval();
   std::cout << "Interval: " << eventsInterval_ << '\n';
-  for (const auto clientId : std::ranges::views::iota(0, params_.nClients))
+  for (const auto clientId : std::views::iota(0, params_.nClients))
   {
     if (params_.time < clientId * eventsInterval_)
       break;
@@ -83,8 +84,9 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
     if (newOrderTime < params_.time)
     {
       auto newEventOrder = Order::makeOrder(event.order().clientId(), newOrderTime);
-      auto newEvent = Event(EventType::ORDER_CREATED, newOrderTime, std::move(newEventOrder));
+      auto newEvent = Event(EventType::ORDER_CREATED, newOrderTime, newEventOrder);
       events_.insert(std::move(newEvent));
+      clientsGui_->update(newEventOrder);
     }
   }
   if (deviceHolder_->hasSpace(event.time()))

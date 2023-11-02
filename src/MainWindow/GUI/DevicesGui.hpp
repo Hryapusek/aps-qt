@@ -3,7 +3,7 @@
 
 #include <QTableWidget>
 #include <memory>
-#include "Ecosystem/Order.hpp"
+#include "MainWindow/Ecosystem/Order.hpp"
 
 class DevicesGui
 {

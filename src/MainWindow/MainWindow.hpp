@@ -3,9 +3,10 @@
 
 #include <QMainWindow>
 #include "Ecosystem/EventHolder.hpp"
-#include "BufferGui.hpp"
-#include "DevicesGui.hpp"
-#include "EventsGui.hpp"
+#include "GUI/BufferGui.hpp"
+#include "GUI/DevicesGui.hpp"
+#include "GUI/EventsGui.hpp"
+#include "GUI/ClientsGui.hpp"
 
 namespace Ui
 {
@@ -30,8 +31,10 @@ private:
   std::unique_ptr<BufferGui> bufferGui_;
   std::unique_ptr<DevicesGui> devicesGui_;
   std::unique_ptr<EventsGui> eventsGui_;
+  std::unique_ptr<ClientsGui> clientsGui_;
   void execStartupWindow();
   void updateStatistics();
+  void initParams(const InputParameters &params);
 };
 
 #endif
