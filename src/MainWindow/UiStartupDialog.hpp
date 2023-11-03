@@ -104,6 +104,7 @@ public:
         devicesSpin->setBaseSize(QSize(0, 0));
         devicesSpin->setMinimum(1);
         devicesSpin->setMaximum(90);
+        devicesSpin->setValue(10);
 
         horizontalLayout->addWidget(devicesSpin);
 
@@ -129,6 +130,7 @@ public:
         clientsSpin->setBaseSize(QSize(0, 0));
         clientsSpin->setMinimum(1);
         clientsSpin->setMaximum(90);
+        clientsSpin->setValue(20);
 
         horizontalLayout_2->addWidget(clientsSpin);
 
@@ -153,7 +155,8 @@ public:
         timeSpin->setMinimumSize(QSize(60, 0));
         timeSpin->setBaseSize(QSize(0, 0));
         timeSpin->setMinimum(1);
-        timeSpin->setMaximum(1000);
+        timeSpin->setMaximum(100000);
+        timeSpin->setValue(43200);
 
         horizontalLayout_3->addWidget(timeSpin);
 
@@ -175,6 +178,7 @@ public:
         bufferSpin->setObjectName(QString::fromUtf8("bufferSpin"));
         bufferSpin->setMinimum(1);
         bufferSpin->setMaximum(1000);
+        bufferSpin->setValue(5);
 
         horizontalLayout_4->addWidget(bufferSpin);
 
@@ -182,6 +186,7 @@ public:
         bufferSlider->setObjectName(QString::fromUtf8("bufferSlider"));
         bufferSlider->setMinimum(1);
         bufferSlider->setMaximum(1000);
+        bufferSlider->setValue(5);
         bufferSlider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_4->addWidget(bufferSlider);
@@ -203,9 +208,9 @@ public:
         minDeviceTimeSpin = new QDoubleSpinBox(StartupDialog);
         minDeviceTimeSpin->setObjectName(QString::fromUtf8("minDeviceTimeSpin"));
         minDeviceTimeSpin->setMinimum(0.010000000000000);
-        minDeviceTimeSpin->setMaximum(20.000000000000000);
+        minDeviceTimeSpin->setMaximum(200.000000000000000);
         minDeviceTimeSpin->setSingleStep(0.300000000000000);
-        minDeviceTimeSpin->setValue(0.500000000000000);
+        minDeviceTimeSpin->setValue(20.000000000000000);
 
         horizontalLayout_5->addWidget(minDeviceTimeSpin);
 
@@ -226,9 +231,9 @@ public:
         maxDeviceTimeSpin = new QDoubleSpinBox(StartupDialog);
         maxDeviceTimeSpin->setObjectName(QString::fromUtf8("maxDeviceTimeSpin"));
         maxDeviceTimeSpin->setMinimum(0.010000000000000);
-        maxDeviceTimeSpin->setMaximum(20.000000000000000);
+        maxDeviceTimeSpin->setMaximum(200.000000000000000);
         maxDeviceTimeSpin->setSingleStep(0.300000000000000);
-        maxDeviceTimeSpin->setValue(1.000000000000000);
+        maxDeviceTimeSpin->setValue(30.000000000000000);
 
         horizontalLayout_6->addWidget(maxDeviceTimeSpin);
 
@@ -248,7 +253,7 @@ public:
 
         lambdaSpin = new QDoubleSpinBox(StartupDialog);
         lambdaSpin->setObjectName(QString::fromUtf8("lambdaSpin"));
-        lambdaSpin->setMinimum(0.010000000000000);
+        lambdaSpin->setMinimum(0.100000000000000);
         lambdaSpin->setMaximum(100.000000000000000);
         lambdaSpin->setSingleStep(0.100000000000000);
 
@@ -304,8 +309,8 @@ public:
         label_2->setText(QCoreApplication::translate("StartupDialog", "Clients", nullptr));
         label_3->setText(QCoreApplication::translate("StartupDialog", "Time", nullptr));
         label_4->setText(QCoreApplication::translate("StartupDialog", "Buffer size", nullptr));
-        label_5->setText(QCoreApplication::translate("StartupDialog", "Min device time(secs)", nullptr));
-        label_6->setText(QCoreApplication::translate("StartupDialog", "Max device time(secs)", nullptr));
+        label_5->setText(QCoreApplication::translate("StartupDialog", "Min device time", nullptr));
+        label_6->setText(QCoreApplication::translate("StartupDialog", "Max device time", nullptr));
         label_7->setText(QCoreApplication::translate("StartupDialog", "Lambda", nullptr));
         startBtn->setText(QCoreApplication::translate("StartupDialog", "Start", nullptr));
         exitBtn->setText(QCoreApplication::translate("StartupDialog", "Exit", nullptr));
