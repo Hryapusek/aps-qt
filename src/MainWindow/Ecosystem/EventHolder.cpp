@@ -16,13 +16,14 @@ EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, De
   buffer_ = std::make_unique< Buffer >(params_.bufferSize, bufferGui_, eventsGui_);
   stats_ = std::make_unique< Statistics > (params_.nDevices);
   QObject::connect(buffer_.get(), &Buffer::orderRejected, stats_.get(), &Statistics::addRejected);
-  eventsInterval_ = calcEventsInterval();
+  calcEventsInterval();
   std::cout << "Interval: " << eventsInterval_ << '\n';
   for (const auto clientId : std::views::iota(0, params_.nClients))
   {
     if (params_.time < clientId * eventsInterval_)
       break;
     double creationTime = clientId * eventsInterval_;
+    calcEventsInterval();
     events_.insert(Event(EventType::ORDER_CREATED, creationTime, Order::makeOrder(clientId, creationTime)));
   }
 }
@@ -56,14 +57,14 @@ double EventHolder::getDeviceLoad() const
   return stats_->getDeviceLoad();
 }
 
-double EventHolder::calcEventsInterval()
+void EventHolder::calcEventsInterval()
 {
   std::random_device rd;
   std::default_random_engine engine(rd());
-  std::uniform_real_distribution< double > distribution(0, 1);
+  std::uniform_real_distribution< double > distribution(0.3, 0.6);
   auto r = distribution(engine);
   auto lambda = params_.lambda;
-  return -1 / lambda * std::log(r);
+  eventsInterval_ = -1 / lambda * std::log(r);
 }
 
 void EventHolder::processEvent(const Event &event)
@@ -80,6 +81,7 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
   eventsGui_->addEvent(event.time(), event.order(), "CREATED");
   { // Put another OrderCreated in array after nClients * eventsInterval_ time.
     // New orders must be generated every "eventsInterval_" time
+    calcEventsInterval();
     auto newOrderTime = event.time() + params_.nClients * eventsInterval_;
     if (newOrderTime < params_.time)
     {

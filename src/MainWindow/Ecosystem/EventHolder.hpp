@@ -48,7 +48,7 @@ private:
   ClientsGui *clientsGui_;
   std::set< Event > events_;
 
-  [[nodiscard]] double calcEventsInterval();
+  void calcEventsInterval();
   void processEvent(const Event &event);
   void processOrderCreatedEvent(const Event &event);
   void processDeviceFinishedEvent(const Event &event);
