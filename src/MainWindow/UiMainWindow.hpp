@@ -81,7 +81,6 @@ public:
     QSpacerItem *horizontalSpacer;
     QPushButton *stepBtn;
     QPushButton *autoBtn;
-    QPushButton *resultsBtn;
     QSpacerItem *horizontalSpacer_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -359,11 +358,6 @@ public:
 
         horizontalLayout->addWidget(autoBtn);
 
-        resultsBtn = new QPushButton(centralwidget);
-        resultsBtn->setObjectName(QString::fromUtf8("resultsBtn"));
-
-        horizontalLayout->addWidget(resultsBtn);
-
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_2);
@@ -428,7 +422,6 @@ public:
         label_23->setText(QCoreApplication::translate("MainWindow", "Device load", nullptr));
         stepBtn->setText(QCoreApplication::translate("MainWindow", "Step", nullptr));
         autoBtn->setText(QCoreApplication::translate("MainWindow", "Auto", nullptr));
-        resultsBtn->setText(QCoreApplication::translate("MainWindow", "Results", nullptr));
     } // retranslateUi
 
 };
