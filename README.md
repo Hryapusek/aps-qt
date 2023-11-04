@@ -3,7 +3,8 @@ You can see information about the task in **info.md**.
 # Build
 This application requires following libraries:
 - Qt5  
-- [Format](https://github.com/fmtlib/fmt)  
+- [Format](https://github.com/fmtlib/fmt)
+- [Boost](https://sourceforge.net/projects/boost/files/boost-binaries/1.83.0/boost_1_83_0-msvc-14.3-64.exe/download)
 
 Also compiler required that supports C++23 features. For example [g++](http://www.equation.com/servlet/equation.cmd?fa=fortran). Download ***latest*** version!  
 Install [CMake](https://cmake.org/download/) after this.
