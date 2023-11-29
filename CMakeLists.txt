@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 set(target aps)
 project(${target} LANGUAGES CXX)
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_library(Fmt fmt REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -53,7 +53,7 @@ add_executable(${target}
   src/MainWindow/Ecosystem/Statistics.cpp
 )
 
-target_link_libraries(${target} Qt5::Widgets ${Fmt})
-target_include_directories(${target} PRIVATE ${Qt5Widgets_INCLUDE_DIRS} src)
+target_link_libraries(${target} Qt${QT_VERSION_MAJOR}::Widgets ${Fmt})
+target_include_directories(${target} PRIVATE src)
 target_compile_options(${target} PRIVATE -Wall -Wextra)
 target_compile_definitions(${target} PRIVATE _NDEBUG)

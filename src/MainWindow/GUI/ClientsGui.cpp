@@ -1,6 +1,5 @@
 #include "ClientsGui.hpp"
 #include <ranges>
-#include <fmt/format.h>
 
 ClientsGui::ClientsGui(QTableWidget *table, int nClients) :
   table_(table)
@@ -14,7 +13,7 @@ ClientsGui::ClientsGui(QTableWidget *table, int nClients) :
     table_->insertRow(newRow);
 
     {
-      auto indexText = QString::fromStdString(fmt::format("{}", index));
+      auto indexText = QString::fromStdString(std::to_string(index));
       auto indexItem = itemProto_->clone();
       indexItem->setText(indexText);
       table_->setItem(newRow, Column::INDEX, indexItem);

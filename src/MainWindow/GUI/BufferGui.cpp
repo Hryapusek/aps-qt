@@ -1,6 +1,5 @@
 #include "BufferGui.hpp"
 #include <ranges>
-#include <fmt/format.h>
 
 BufferGui::BufferGui(QTableWidget *table, int bufferSize) :
   table_(table),
@@ -15,7 +14,7 @@ BufferGui::BufferGui(QTableWidget *table, int bufferSize) :
     table_->insertRow(newRow);
 
     {
-      auto indexText = QString::fromStdString(fmt::format("{}", newRow));
+      auto indexText = QString::fromStdString(std::to_string(newRow));
       auto indexItem = itemProto->clone();
       indexItem->setText(indexText);
       table_->setItem(newRow, Column::INDEX, indexItem);

@@ -1,7 +1,6 @@
 #include "DevicesGui.hpp"
 
 #include <ranges>
-#include <fmt/format.h>
 
 DevicesGui::Device::Device(int index) :
   index_(index)
@@ -51,7 +50,7 @@ DevicesGui::DevicesGui(QTableWidget *table, int nDevices) :
     table_->insertRow(newRow);
 
     {
-      auto indexText = QString::fromStdString(fmt::format("{}", newRow));
+      auto indexText = QString::fromStdString(std::to_string(newRow));
       auto indexItem = itemProto_->clone();
       indexItem->setText(indexText);
       table_->setItem(newRow, Column::INDEX, indexItem);
