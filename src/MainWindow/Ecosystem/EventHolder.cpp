@@ -81,8 +81,11 @@ void EventHolder::processEvent(const Event &event)
 void EventHolder::processOrderCreatedEvent(const Event &event)
 {
   assert(("Event type must be OrderCreated", event.type() == EventType::ORDER_CREATED));
-  auto nextCreated = std::ranges::find_if(events_, [&](const Event &e){return e.order().clientId() == event.order().clientId();});
-  if (nextCreated != events_.end())
+  auto nextCreated = std::ranges::find_if(events_, [&](const Event &e) {
+    return e.order().clientId() == event.order().clientId() &&
+          e.type() == EventType::ORDER_CREATED;
+  });
+  if (nextCreated != events_.cend())
   {
     clientsGui_->update(nextCreated->order());
   }
