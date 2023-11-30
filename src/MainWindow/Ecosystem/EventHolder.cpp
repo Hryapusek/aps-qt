@@ -122,7 +122,7 @@ double EventHolder::processOrder(Order order, double time)
 {
   auto finishTime = deviceHolder_->processOrder(order, time);
   stats_->addDeviceProcessingTime(time, finishTime);
-  devicesGui_->process(order);
+  devicesGui_->process(order, finishTime);
   eventsGui_->addEvent(time, order, "PUT IN DEVICE");
   return finishTime;
 }

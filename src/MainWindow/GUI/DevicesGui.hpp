@@ -27,10 +27,11 @@ class DevicesGui
   {
     INDEX,
     ORDER,
+    FINISH_TIME
   };
 public:
   DevicesGui(QTableWidget *table, int nDevices);
-  void process(Order order);
+  void process(Order order, double finishTime);
   void finishProcessing(Order order);
 
 private:

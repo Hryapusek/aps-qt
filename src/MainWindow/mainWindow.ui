@@ -124,6 +124,11 @@
                 <string>Заявка</string>
                </property>
               </column>
+              <column>
+               <property name="text">
+                <string>Время завершения</string>
+               </property>
+              </column>
              </widget>
             </item>
            </layout>

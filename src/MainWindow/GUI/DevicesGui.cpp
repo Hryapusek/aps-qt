@@ -1,6 +1,7 @@
 #include "DevicesGui.hpp"
 
 #include <ranges>
+#include <QHeaderView>
 
 DevicesGui::Device::Device(int index) :
   index_(index)
@@ -43,6 +44,7 @@ DevicesGui::DevicesGui(QTableWidget *table, int nDevices) :
   itemProto_ = std::make_unique< QTableWidgetItem >(QString());
   itemProto_->setTextAlignment(Qt::AlignmentFlag::AlignCenter);
   itemProto_->setFlags(itemProto_->flags() & ~(Qt::ItemFlag::ItemIsEditable | Qt::ItemFlag::ItemIsSelectable));
+  table_->horizontalHeader()->resizeSections(QHeaderView::ResizeMode::ResizeToContents);
   for (auto index : std::ranges::views::iota(0, nDevices))
   {
     devices_.push_back(Device(index));
@@ -58,11 +60,13 @@ DevicesGui::DevicesGui(QTableWidget *table, int nDevices) :
 
     table_->setItem(newRow, Column::ORDER, itemProto_->clone());
 
+    table_->setItem(newRow, Column::FINISH_TIME, itemProto_->clone());
+
     table_->setVerticalHeaderItem(newRow, new QTableWidgetItem(""));
   }
 }
 
-void DevicesGui::process(Order order)
+void DevicesGui::process(Order order, double finishTime)
 {
   auto isDeviceFree = [](const Device &d) {
     return d.isFree();
@@ -74,6 +78,9 @@ void DevicesGui::process(Order order)
   auto orderItem = itemProto_->clone();
   orderItem->setText(QString::fromStdString(order.name()));
   table_->setItem(device->index(), Column::ORDER, orderItem);
+  auto finishTimeItem = itemProto_->clone();
+  finishTimeItem->setText(QString::fromStdString(std::to_string(finishTime)));
+  table_->setItem(device->index(), Column::FINISH_TIME, finishTimeItem);
 }
 
 void DevicesGui::finishProcessing(Order order)
