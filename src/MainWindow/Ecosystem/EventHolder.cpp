@@ -78,6 +78,7 @@ void EventHolder::processEvent(const Event &event)
 void EventHolder::processOrderCreatedEvent(const Event &event)
 {
   assert(("Event type must be OrderCreated", event.type() == EventType::ORDER_CREATED));
+  clientsGui_->update(event.order());
   eventsGui_->addEvent(event.time(), event.order(), "CREATED");
   { // Put another OrderCreated in array after nClients * eventsInterval_ time.
     // New orders must be generated every "eventsInterval_" time
@@ -88,7 +89,6 @@ void EventHolder::processOrderCreatedEvent(const Event &event)
       auto newEventOrder = Order::makeOrder(event.order().clientId(), newOrderTime);
       auto newEvent = Event(EventType::ORDER_CREATED, newOrderTime, newEventOrder);
       events_.insert(std::move(newEvent));
-      clientsGui_->update(newEventOrder);
     }
   }
   if (deviceHolder_->hasSpace(event.time()))
