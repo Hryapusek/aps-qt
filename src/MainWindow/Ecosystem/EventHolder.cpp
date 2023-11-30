@@ -18,14 +18,17 @@ EventHolder::EventHolder(const InputParameters &params, BufferGui *bufferGui, De
   QObject::connect(buffer_.get(), &Buffer::orderRejected, stats_.get(), &Statistics::addRejected);
   calcEventsInterval();
   std::cout << "Interval: " << eventsInterval_ << '\n';
-  for (const auto clientId : std::views::iota(0, params_.nClients))
+  double currentTime = 0;
+  int clientId = 0;
+  while (currentTime < params_.time)
   {
-    if (params_.time < clientId * eventsInterval_)
-      break;
-    double creationTime = clientId * eventsInterval_;
+    events_.insert(Event(EventType::ORDER_CREATED, currentTime, Order::makeOrder(clientId % params_.nClients, currentTime)));
     calcEventsInterval();
-    events_.insert(Event(EventType::ORDER_CREATED, creationTime, Order::makeOrder(clientId, creationTime)));
+    currentTime += eventsInterval_;
+    ++clientId;
   }
+  for (const auto &event : events_ | std::views::take(params_.nClients))
+    clientsGui_->update(event.order());
 }
 
 void EventHolder::step()
@@ -78,19 +81,12 @@ void EventHolder::processEvent(const Event &event)
 void EventHolder::processOrderCreatedEvent(const Event &event)
 {
   assert(("Event type must be OrderCreated", event.type() == EventType::ORDER_CREATED));
-  clientsGui_->update(event.order());
-  eventsGui_->addEvent(event.time(), event.order(), "CREATED");
-  { // Put another OrderCreated in array after nClients * eventsInterval_ time.
-    // New orders must be generated every "eventsInterval_" time
-    calcEventsInterval();
-    auto newOrderTime = event.time() + params_.nClients * eventsInterval_;
-    if (newOrderTime < params_.time)
-    {
-      auto newEventOrder = Order::makeOrder(event.order().clientId(), newOrderTime);
-      auto newEvent = Event(EventType::ORDER_CREATED, newOrderTime, newEventOrder);
-      events_.insert(std::move(newEvent));
-    }
+  auto nextCreated = std::ranges::find_if(events_, [&](const Event &e){return e.order().clientId() == event.order().clientId();});
+  if (nextCreated != events_.end())
+  {
+    clientsGui_->update(nextCreated->order());
   }
+  eventsGui_->addEvent(event.time(), event.order(), "CREATED");
   if (deviceHolder_->hasSpace(event.time()))
   {
     buffer_->addOrder(event.order(), event.time());
