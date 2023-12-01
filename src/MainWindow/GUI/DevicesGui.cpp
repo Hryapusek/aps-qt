@@ -89,4 +89,5 @@ void DevicesGui::finishProcessing(Order order)
   assert(device != devices_.end());
   device->finishProcessing();
   table_->setItem(device->index(), Column::ORDER, itemProto_->clone());
+  table_->setItem(device->index(), Column::FINISH_TIME, itemProto_->clone());
 }
