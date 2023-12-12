@@ -4,6 +4,7 @@ project(${target} LANGUAGES CXX)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(Boost REQUIRED)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -54,6 +55,6 @@ add_executable(${target}
 )
 
 target_link_libraries(${target} Qt${QT_VERSION_MAJOR}::Widgets ${Fmt})
-target_include_directories(${target} PRIVATE src)
+target_include_directories(${target} PRIVATE src ${Boost_INCLUDE_DIRS})
 target_compile_options(${target} PRIVATE -Wall -Wextra)
 target_compile_definitions(${target} PRIVATE _NDEBUG)
