@@ -13,7 +13,7 @@ Then go to project directory and execute in powershell the next script.
 ```sh
 mkdir build
 cd build
-cmake -G Ninja
+cmake -G Ninja ..
 cmake -S ../ -B .
 cmake --build . 
 ```
